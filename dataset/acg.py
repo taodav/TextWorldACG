@@ -3,14 +3,14 @@ import json
 import textworld
 from tqdm import tqdm
 
-from .agents.walkthrough import WalkthroughAgent, WalkthroughDone
-from .utils.files import get_games_list
-from .utils.parse import get_state_entities, parse_game_state
+from agents.walkthrough import WalkthroughAgent, WalkthroughDone
+from utils.files import get_games_list
+from utils.parse import get_state_entities, parse_game_state
 
 
 class TextWorldACG:
-    def __init__(self, games_dir='./gen_games/',
-                 file_name='./data/train.text.dataset.json',
+    def __init__(self, games_dir='../tw_games/',
+                 file_name='../data/train.text.dataset.json',
                  save_data=True):
         """
 
@@ -35,7 +35,6 @@ class TextWorldACG:
             if self.save_data:
                 with open(self.file_name, 'w') as outfile:
                     json.dump(self.state_action_pairs, outfile)
-
 
     def __getitem__(self, idx):
         return self.state_action_pairs[idx]
@@ -117,3 +116,6 @@ class TextWorldACG:
                 previous_actions.append(command)
             except WalkthroughDone:
                 break
+
+if __name__ == "__main__":
+    dataset = TextWorldACG()

@@ -5,7 +5,7 @@ import random
 import argparse
 from tqdm import tqdm
 
-from src.utils import challenge
+from dataset.utils import challenge
 
 
 def _get_available_challenges():
@@ -97,7 +97,7 @@ if __name__ == "__main__":
             options.nb_objects = random.choice(nb_objects_list)
             options.quest_length = random.choice(quest_lengths)
             options.seeds = i
-            game_file, game = textworld.make(options, args.output)
+            game_file, game = textworld.make(options)
     elif args.subcommand == "challenge":
         try:
             _, challenge, level = args.challenge.split("-")
